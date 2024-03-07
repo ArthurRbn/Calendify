@@ -1,29 +1,28 @@
 import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '../config/database';
 
-interface UserAttributes {
+interface BuyerAttributes {
     id?: number;
-    username: string;
-    password: string;
+    name: string;
+    companyName: string;
 }
 
-interface UserModel extends Model<UserAttributes>, UserAttributes {}
+interface BuyerModel extends Model<BuyerAttributes>, BuyerAttributes {}
 
-const User = sequelize.define<UserModel>('User', {
+const Buyer = sequelize.define<BuyerModel>('Buyer', {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
     },
-    username: {
+    name: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
     },
-    password: {
+    companyName: {
         type: DataTypes.STRING,
         allowNull: false,
     },
 });
 
-export { User };
+export { Buyer };

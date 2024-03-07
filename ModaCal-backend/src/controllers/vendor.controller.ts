@@ -1,13 +1,13 @@
 import { Request, Response } from 'express';
-import { UserService } from '../services/user.service';
+import { VendorService } from '../services/vendor.service';
 
-const userService = new UserService();
+const vendorService = new VendorService();
 
-export async function register(req: Request, res: Response) {
+export async function registerVendor(req: Request, res: Response) {
     try {
         const { username, password } = req.body;
-        const newUser = await userService.createUser(username, password);
-        const token = userService.generateToken(newUser.id!);
+        const newVendor = await vendorService.createVendor(username, password);
+        const token = vendorService.generateToken(newVendor.id!);
         res.status(201).json({ token });
     } catch (error) {
         console.error('Registration error:', error);
@@ -15,14 +15,14 @@ export async function register(req: Request, res: Response) {
     }
 }
 
-export async function login(req: Request, res: Response) {
+export async function loginVendor(req: Request, res: Response) {
     try {
         const { username, password } = req.body;
-        const user = await userService.validateUser(username, password);
+        const user = await vendorService.validateVendor(username, password);
         if (!user) {
             return res.status(401).json({ error: 'Authentication failed' });
         }
-        const token = userService.generateToken(user.id!);
+        const token = vendorService.generateToken(user.id!);
         res.json({ token });
     } catch (error) {
         console.error('Login error:', error);
