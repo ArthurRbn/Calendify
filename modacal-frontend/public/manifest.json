@@ -1,0 +1,15 @@
+{
+  "short_name": "ModaCal",
+  "name": "ModaResa calendar app",
+  "icons": [
+    {
+      "src": "modaIcon.webp",
+      "type": "image/png",
+      "sizes": "1125x1125"
+    },
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}

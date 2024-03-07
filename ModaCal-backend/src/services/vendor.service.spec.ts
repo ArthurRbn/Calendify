@@ -15,7 +15,6 @@ describe('VendorService', () => {
 
     it('should create a new vendor and return it', async () => {
         const vendor = await service.createVendor('testVendor', 'password');
-        console.log(vendor);
         expect(vendor).toEqual({ id: 1, username: 'testVendor', password: 'password' });
     });
 });
