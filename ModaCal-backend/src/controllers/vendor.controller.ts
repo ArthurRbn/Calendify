@@ -29,3 +29,7 @@ export async function loginVendor(req: Request, res: Response) {
         res.status(500).json({ error: 'Internal server error' });
     }
 }
+
+export const validateVendorToken = (req: Request, res: Response) => {
+    res.status(200).json({ message: 'Token is valid' });
+};

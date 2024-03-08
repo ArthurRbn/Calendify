@@ -6,7 +6,7 @@
       "src": "modaIcon.webp",
       "type": "image/png",
       "sizes": "1125x1125"
-    },
+    }
   ],
   "start_url": ".",
   "display": "standalone",
