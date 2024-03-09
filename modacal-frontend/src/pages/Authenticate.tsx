@@ -15,7 +15,7 @@ function Authenticate() {
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
   const [error, setError] = useState<string | undefined>('');
-  const [mode, setMode] = useState<'signin' | 'signup'>('signup');
+  const [mode, setMode] = useState<'signin' | 'signup'>('signin');
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();

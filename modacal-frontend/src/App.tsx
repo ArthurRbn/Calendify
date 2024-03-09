@@ -4,7 +4,6 @@ import {QueryClient, QueryClientProvider} from 'react-query';
 import {SnackbarProvider} from 'notistack'
 import {ProtectedRoute} from './components/ProtectedRoute';
 import Home from './pages/Home';
-import SignIn from './pages/SignIn';
 import Authenticate from './pages/Authenticate';
 
 const queryClient = new QueryClient();
