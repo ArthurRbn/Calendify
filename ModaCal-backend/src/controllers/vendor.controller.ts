@@ -6,6 +6,9 @@ const vendorService = new VendorService();
 export async function registerVendor(req: Request, res: Response) {
     try {
         const { username, password } = req.body;
+        if (await vendorService.usernameAvaialable(username) === false) {
+            return res.status(409).json({ error: 'User already exists.' });
+        }
         const newVendor = await vendorService.createVendor(username, password);
         const token = vendorService.generateToken(newVendor.id!);
         res.status(201).json({ token });

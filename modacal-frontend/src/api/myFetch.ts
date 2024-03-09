@@ -1,7 +1,7 @@
-export const myFetch = async (route: string, options?: any) => {
+export const myFetch = async (route: string, options?: any, useAuth: boolean = true) => {
     try {
         const jwt = localStorage.getItem("jwt") || "";
-        if (jwt === "") {
+        if (jwt === "" && useAuth) {
             throw new Error("jwt is not defined");
         }
         const body = {
@@ -9,7 +9,7 @@ export const myFetch = async (route: string, options?: any) => {
             ...{
                 headers: {
                     "content-type": "application/json",
-                    authorization: `Bearer ${jwt}`,
+                    ...(useAuth ? {authorization: `Bearer ${jwt}`} : {}),
                 },
             },
         };

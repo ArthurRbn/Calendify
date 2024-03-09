@@ -1,5 +1,6 @@
 import {useQuery} from 'react-query';
 import { myFetch } from '../api/myFetch';
+import {apiUrl} from "../constants";
 
 const checkAuthStatus = async () => {
   const token = localStorage.getItem('jwt');
@@ -8,7 +9,7 @@ const checkAuthStatus = async () => {
   }
 
   try {
-    const response = await myFetch('/api/validate-token', {
+    const response = await myFetch(`${apiUrl}/vendors/validate-token`, {
       method: 'POST',
     });
 

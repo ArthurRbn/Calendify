@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import 'dotenv/config';
 import { testDB } from './config/database';
 import vendorRoutes from './routes/vendor.routes';
@@ -10,6 +11,7 @@ const port = process.env.SERVER_PORT || 3000;
 
 testDB();
 
+app.use(cors());
 app.use(express.json());
 app.use('/api/vendors', vendorRoutes);
 app.use('/api/buyers', buyerRoutes);
