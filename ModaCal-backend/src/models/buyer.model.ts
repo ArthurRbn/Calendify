@@ -5,6 +5,7 @@ interface BuyerAttributes {
     id?: number;
     name: string;
     companyName: string;
+    vendorId: number;
 }
 
 interface BuyerModel extends Model<BuyerAttributes>, BuyerAttributes {}
@@ -21,6 +22,10 @@ const Buyer = sequelize.define<BuyerModel>('Buyer', {
     },
     companyName: {
         type: DataTypes.STRING,
+        allowNull: false,
+    },
+    vendorId: {
+        type: DataTypes.INTEGER,
         allowNull: false,
     },
 });

@@ -61,7 +61,7 @@ const Appointment = sequelize.define<AppointmentModel>('Appointment', {
 Vendor.hasMany(Appointment, { foreignKey: 'vendorId' });
 Appointment.belongsTo(Vendor, { foreignKey: 'vendorId' });
 
-Buyer.hasMany(Appointment, { foreignKey: 'buyerId' });
-Appointment.belongsTo(Buyer, { foreignKey: 'buyerId' });
+Vendor.hasMany(Buyer, { foreignKey: 'vendorId' });
+Buyer.belongsTo(Vendor, { foreignKey: 'vendorId' });
 
 export { Appointment };

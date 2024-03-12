@@ -4,9 +4,9 @@ import { authenticate } from "../middlewares/authenticate.middleware";
 
 const router = express.Router();
 
+router.get('/', authenticate, getAppointments);
 router.post('/', authenticate, createAppointment);
 router.put('/:id', authenticate, updateAppointment);
 router.delete('/:id', authenticate, deleteAppointment);
-router.get('/', authenticate, getAppointments);
 
 export default router;

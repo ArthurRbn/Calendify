@@ -45,7 +45,7 @@ function Authenticate() {
     if (response && response.ok) {
       const data = await response.json() as AuthResponse;
       localStorage.setItem('jwt', data.token);
-      queryClient.invalidateQueries('authStatus');
+      await queryClient.invalidateQueries('authStatus');
       navigate('/');
     } else {
       console.error(`${mode} error`);

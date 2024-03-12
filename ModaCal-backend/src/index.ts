@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import 'dotenv/config';
-import { testDB } from './config/database';
+import {testDB} from './config/database';
 import vendorRoutes from './routes/vendor.routes';
 import buyerRoutes from './routes/buyer.routes';
 import appointmentRoutes from './routes/appointment.routes';
@@ -18,9 +18,9 @@ app.use('/api/buyers', buyerRoutes);
 app.use('/api/appointments', appointmentRoutes);
 
 app.get('/api', (req, res) => {
-    res.send('ModaCal API is up !');
+  res.send('ModaCal API is up !');
 });
 
 app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
+  console.log(`Server is running on http://localhost:${port}`);
 });

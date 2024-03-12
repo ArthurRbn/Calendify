@@ -4,12 +4,8 @@ import {useNavigate} from "react-router-dom";
 import {useQueryClient} from "react-query";
 import {Calendar, momentLocalizer} from 'react-big-calendar';
 import moment from 'moment';
-import {apiUrl} from "../constants";
-import {myFetch} from "../api/myFetch";
-import {AuthResponse} from "../types/AuthResponse";
-import {ErrorResponse} from "../types/ErrorResponse";
 import {useSnackbar} from "notistack";
-import {Buyer} from "../types/Buyer";
+import {useAddBuyer, useBuyers, useDeleteBuyer} from "../hooks/useBuyers";
 
 const localizer = momentLocalizer(moment);
 
@@ -17,8 +13,10 @@ function Home() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const {enqueueSnackbar} = useSnackbar();
+  const {data: buyers, isFetched} = useBuyers();
+  const addBuyerMutation = useAddBuyer();
+  const deleteBuyerMutation = useDeleteBuyer();
   const [events, setEvents] = React.useState([]);
-  const [buyers, setBuyers] = React.useState<Buyer[]>([]);
   const [isBuyersModalOpen, setIsBuyersModalOpen] = React.useState<boolean>(false);
   const [buyerName, setBuyerName] = React.useState<string>('');
   const [buyerCompany, setBuyerCompany] = React.useState<string>('');
@@ -40,22 +38,22 @@ function Home() {
       setBuyerError(undefined);
     }
 
-    const body = JSON.stringify({name: buyerName, companyName: buyerCompany});
-    const response = await myFetch(`${apiUrl}/buyers/`, {method: 'POST', body});
+    const newBuyer = {
+      name: buyerName,
+      companyName: buyerCompany,
+    };
 
-    if (response && response.ok) {
-      const data = await response.json() as Buyer;
-      setBuyers(buyers.concat([data]));
-      enqueueSnackbar("Buyer created", {variant: "success"});
-    } else {
-      console.error(`Error during buyer creation.`);
-      if (response) {
-        const errorData = await response.json() as ErrorResponse;
-        enqueueSnackbar(errorData.error, {variant: "error"});
-        console.error(errorData.error);
-
+    addBuyerMutation.mutate(newBuyer, {
+      onSuccess: () => {
+        enqueueSnackbar('Buyer added successfully.', {variant: "success"})
+        setIsBuyersModalOpen(false);
+        setBuyerName('');
+        setBuyerCompany('');
+      },
+      onError: () => {
+        enqueueSnackbar('Error creating buyer.', {variant: "error"})
       }
-    }
+    });
   }
 
   return (
@@ -168,14 +166,27 @@ function Home() {
                 >
                   <svg className="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                        xmlns="http://www.w3.org/2000/svg">
-                  <path
-                          d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                        ></path>
+                    <path
+                      d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                    ></path>
                   </svg>
                   Add new buyer
                 </button>
-                { buyers.toString() }
               </form>
+              <div className="flex flex-col">
+                {isFetched && buyers && buyers.map((buyer) => {
+                  return (
+                    <>
+                      <p>
+                        { buyer.name }
+                      </p>
+                      <button onClick={() => deleteBuyerMutation.mutate(buyer)}>
+                        del
+                      </button>
+                    </>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>
