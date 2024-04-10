@@ -7,7 +7,7 @@ import buyerRoutes from './routes/buyer.routes';
 import appointmentRoutes from './routes/appointment.routes';
 
 const app = express();
-const port = process.env.SERVER_PORT || 3000;
+const port = process.env.SERVER_PORT || 4200;
 
 testDB();
 
