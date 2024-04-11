@@ -5,7 +5,7 @@ const appointmentService = new AppointmentService();
 
 export async function createAppointment(req: Request, res: Response) {
     try {
-        const appointment = await appointmentService.createAppointment({ ...req.body, vendorId: req.body.vendorId });
+        const appointment = await appointmentService.createAppointment({ ...req.body, vendorId: req.vendorId });
         res.status(201).json(appointment);
     } catch (error) {
         console.error('Appointment creation error:', error);

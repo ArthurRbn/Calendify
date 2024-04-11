@@ -13,10 +13,10 @@ export const useDeleteBuyer = () => {
           method: 'DELETE',
         });
         if (!response || !response.ok) {
-          throw new Error('Failed to add buyer');
+          throw new Error('Failed to delete buyer');
         };
       } catch (e) {
-        console.error('Error creating buyer:', e);
+        console.error('Error deleting buyer:', e);
       }
     },
     {
