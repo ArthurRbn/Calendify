@@ -1,9 +1,9 @@
 {
-  "short_name": "ModaCal",
-  "name": "ModaResa calendar app",
+  "short_name": "Calendify",
+  "name": "My calendar app",
   "icons": [
     {
-      "src": "modaIcon.webp",
+      "src": "logo.png",
       "type": "image/png",
       "sizes": "1125x1125"
     }

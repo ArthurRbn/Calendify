@@ -65,10 +65,10 @@ function Authenticate() {
         <a href='#' className='flex items-center mb-6 text-2xl font-semibold'>
           <img
             className='w-8 h-8 mr-2'
-            src='/modaIcon.webp'
+            src='/logo.png'
             alt='logo'
           />
-          ModaCal
+          Calendify
         </a>
         <div className='w-full bg-white rounded-lg max-w-md'>
           <div className='p-8 space-y-4'>

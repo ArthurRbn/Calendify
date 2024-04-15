@@ -73,16 +73,15 @@ function Home() {
       <nav
         className="bg-white w-full z-20 top-0 start-0 border-b border-gray-200">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-          <a href="https://www.modaresa.com/" className="flex items-center space-x-3">
-            <img src="/modaIcon.webp" className="h-16" alt="ModaCal Logo"/>
+          <a href="https://www.arthurrobine.fr/" className="flex items-center space-x-3">
+            <img src="/logo.png" className="h-16" alt="Calendar Logo"/>
             <span className="self-center text-2xl font-semibold whitespace-nowrap">
-              ModaCal
+              Calendify
             </span>
           </a>
           <div className="flex">
             <BuyerModal/>
             <AppointmentModal/>
-
             <button
               type="button"
               onClick={logout}
@@ -104,6 +103,9 @@ function Home() {
           style={{height: 500}}
           onDoubleClickEvent={onDoubleClickEvent}
         />
+        <p className="mt-1 ml-4 text-sm text-gray-500" id="calendar_help">
+          Double click on an element to see more details.
+        </p>
       </div>
 
 
@@ -170,19 +172,19 @@ function Home() {
               </div>
               <div className="flex items-start space-x-4 rtl:space-x-reverse mb-5">
                 <div>
-                  <div className="text-base font-normal text-gray-500 dark:text-gray-400 mb-2">Buyer</div>
+                  <div className="text-base font-normal text-gray-500 mb-2">Buyer</div>
                   <span className="text-gray-900 dark:text-white text-base font-medium block">
                     {buyers.find(b => b.id === selectedEvent?.buyerId)?.name || 'Buyer not found'}
                   </span>
                 </div>
                 <div>
-                  <div className="text-base font-normal text-gray-500 dark:text-gray-400 mb-3">Duration</div>
+                  <div className="text-base font-normal text-gray-500 mb-2">Duration</div>
                   <span className="text-gray-900 dark:text-white text-base font-medium block">30 min</span>
                 </div>
                 <div>
-                  <div className="text-base font-normal text-gray-500 dark:text-gray-400 mb-3">Meeting Type
+                  <div className="text-base font-normal text-gray-500 mb-2">Meeting Type
                   </div>
-                  <span className="text-gray-900 dark:text-white text-base font-medium block">
+                  <span className="text-gray-900 text-base font-medium block">
                     {selectedEvent?.type === AppointmentType.PHYSICAL ? "In person" : "Remote"}
                   </span>
                 </div>

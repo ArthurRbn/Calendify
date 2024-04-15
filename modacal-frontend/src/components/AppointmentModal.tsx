@@ -1,8 +1,7 @@
 import React from 'react';
 import {useSnackbar} from "notistack";
-import {useAddAppointment} from "../hooks/useAppointments";
+import {useAddAppointment, useAppointments} from "../hooks/useAppointments";
 import {useBuyers} from "../hooks/useBuyers";
-import app from "../App";
 
 export enum AppointmentType {
   VIRTUAL = 'virtual',
@@ -22,6 +21,7 @@ export interface Appointment {
 export const AppointmentModal: React.FC = () => {
   const {enqueueSnackbar} = useSnackbar();
   const {data: buyers, isFetched} = useBuyers();
+  const {data: appointments} = useAppointments()
   const addAppointmentMutation = useAddAppointment();
   const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false);
   const [error, setError] = React.useState<string | undefined>(undefined);
@@ -29,6 +29,21 @@ export const AppointmentModal: React.FC = () => {
     title: '',
     type: AppointmentType.PHYSICAL
   });
+
+  const isAppointmentConflict = () => {
+    return appointments && appointments.some((a: Appointment) => {
+      const start = new Date(appointment.startTime!);
+      const end = new Date(appointment.endTime!);
+      const existingStart = new Date(a.startTime!);
+      const existingEnd = new Date(a.endTime!);
+
+      return (
+        (start >= existingStart && start < existingEnd) ||
+        (end > existingStart && end <= existingEnd) ||
+        (start <= existingStart && end >= existingEnd)
+      );
+    })
+  }
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -45,9 +60,13 @@ export const AppointmentModal: React.FC = () => {
     } else if (appointment.buyerId === undefined) {
       setError('A buyer must be selected.');
       return;
+    } else if (isAppointmentConflict()) {
+      setError('There is a conflicting appointment.');
+      return;
     } else {
       setError(undefined);
     }
+
 
     addAppointmentMutation.mutate(appointment, {
       onSuccess: () => {
