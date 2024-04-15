@@ -1,5 +1,4 @@
-import {Buyer} from '../models/buyer.model';
-import {Appointment} from "../models/appointment.model";
+import { Buyer } from '../models/buyer.model';
 
 export class BuyerService {
   async getBuyers(vendorId: number) {

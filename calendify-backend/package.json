@@ -1,5 +1,5 @@
 {
-  "name": "modacal-backend",
+  "name": "calendify-backend",
   "version": "1.0.0",
   "description": "Back-end for a simple calendar app",
   "main": "src/index.ts",

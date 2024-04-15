@@ -1,7 +1,7 @@
-import { useQuery, useMutation, useQueryClient } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { myFetch } from '../api/myFetch';
 import { apiUrl } from '../constants';
-import {Buyer} from "../types/Buyer";
+import { Buyer } from '../types/Buyer';
 
 export const useDeleteBuyer = () => {
   const queryClient = useQueryClient();
@@ -14,7 +14,7 @@ export const useDeleteBuyer = () => {
         });
         if (!response || !response.ok) {
           throw new Error('Failed to delete buyer');
-        };
+        }
       } catch (e) {
         console.error('Error deleting buyer:', e);
       }
@@ -39,7 +39,7 @@ export const useAddBuyer = () => {
         }, true);
         if (!response || !response.ok) {
           throw new Error('Failed to add buyer');
-        };
+        }
       } catch (e) {
         console.error('Error creating buyer:', e);
       }
@@ -58,8 +58,7 @@ const fetchBuyers = async () => {
     if (!response || !response.ok) {
       throw new Error('Network response was not ok');
     }
-    const buyers = await response.json() as Buyer[];
-    return buyers;
+    return await response.json() as Buyer[];
   } catch (e) {
     console.error('Error fetching buyers data:', e);
     return false;

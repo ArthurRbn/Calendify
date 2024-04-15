@@ -14,7 +14,7 @@ export const useDeleteAppointment = () => {
         });
         if (!response || !response.ok) {
           throw new Error('Failed to delete appointment');
-        };
+        }
       } catch (e) {
         console.error('Error creating appointment:', e);
       }
@@ -39,7 +39,7 @@ export const useAddAppointment = () => {
         }, true);
         if (!response || !response.ok) {
           throw new Error('Failed to create appointment');
-        };
+        }
       } catch (e) {
         console.error('Error creating appointment:', e);
       }
