@@ -60,7 +60,7 @@ function Authenticate() {
 
 
   return (
-    <section className='bg-gray-50 dark:bg-gray-900'>
+    <section className='bg-gray-50'>
       <div className='flex flex-col items-center justify-center mx-auto h-screen'>
         <a href='#' className='flex items-center mb-6 text-2xl font-semibold'>
           <img

@@ -93,16 +93,16 @@ export const AppointmentModal: React.FC = () => {
         <div tabIndex={-1}
              className="overflow-y-auto overflow-x-hidden fixed z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
           <div className="relative mx-auto mt-16 p-4 w-full max-w-md max-h-full">
-            <div className="relative bg-white rounded-lg dark:bg-gray-700 shadow-xl">
+            <div className="relative bg-white rounded-lg shadow-xl">
 
-              <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+              <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
+                <h3 className="text-lg font-semibold text-gray-900">
                   Create an appointment
                 </h3>
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(!isModalOpen)}
-                  className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                  className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
                 >
                   <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                        viewBox="0 0 14 14">
@@ -134,7 +134,7 @@ export const AppointmentModal: React.FC = () => {
                     />
                   </div>
                   <div className="col-span-2">
-                    <label htmlFor="buyer" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    <label htmlFor="buyer" className="block mb-2 text-sm font-medium text-gray-900">
                       Buyer
                     </label>
                     <select
@@ -152,7 +152,7 @@ export const AppointmentModal: React.FC = () => {
                     </select>
                   </div>
                   <div className="col-span-2">
-                    <label htmlFor="type" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    <label htmlFor="type" className="block mb-2 text-sm font-medium text-gray-900">
                       Appointment type
                     </label>
                     <select
@@ -210,7 +210,7 @@ export const AppointmentModal: React.FC = () => {
                   Create new appointment
                 </button>
                 {error && (
-                  <p id="filled_error_help" className="mt-4 text-xs text-red-600 dark:text-red-400">
+                  <p id="filled_error_help" className="mt-4 text-xs text-red-600">
                     {error}
                   </p>
                 )}
