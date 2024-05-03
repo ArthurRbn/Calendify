@@ -103,7 +103,7 @@ function Home() {
           style={{height: 500}}
           onDoubleClickEvent={onDoubleClickEvent}
         />
-        <p className="mt-1 ml-4 text-sm text-gray-500" id="calendar_help">
+        <p className="w-fit mx-auto my-3 text-sm text-gray-500" id="calendar_help">
           Double click on an element to see more details.
         </p>
       </div>

@@ -18,7 +18,7 @@ app.use('/api/buyers', buyerRoutes);
 app.use('/api/appointments', appointmentRoutes);
 
 app.get('/api', (req, res) => {
-  res.send('ModaCal API is up !');
+  res.send('Calendify API is up !');
 });
 
 app.listen(port, () => {
