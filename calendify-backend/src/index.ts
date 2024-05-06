@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import 'dotenv/config';
-import {testDB} from './config/database';
+import { testDB } from './config/database';
 import vendorRoutes from './routes/vendor.routes';
 import buyerRoutes from './routes/buyer.routes';
 import appointmentRoutes from './routes/appointment.routes';

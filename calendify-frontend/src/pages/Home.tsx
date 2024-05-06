@@ -1,13 +1,13 @@
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import React, {useCallback} from 'react';
-import {useNavigate} from "react-router-dom";
-import {useQueryClient} from "react-query";
-import {Calendar, momentLocalizer} from 'react-big-calendar';
+import React, { useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useQueryClient } from 'react-query';
+import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
-import {BuyerModal} from "../components/BuyerModal";
-import {Appointment, AppointmentModal, AppointmentType} from "../components/AppointmentModal";
-import {useAppointments, useDeleteAppointment} from "../hooks/useAppointments";
-import {useBuyers} from "../hooks/useBuyers";
+import { BuyerModal } from '../components/BuyerModal';
+import { Appointment, AppointmentModal, AppointmentType } from '../components/AppointmentModal';
+import { useAppointments, useDeleteAppointment } from '../hooks/useAppointments';
+import { useBuyers } from '../hooks/useBuyers';
 
 interface Event extends Appointment {
   start: Date,
@@ -73,7 +73,7 @@ function Home() {
       <nav
         className="bg-white w-full z-20 top-0 start-0 border-b border-gray-200">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-          <a href="https://www.arthurrobine.fr/" className="flex items-center space-x-3">
+          <a href="https://calendify.arthurrobine.fr/" className="flex items-center space-x-3">
             <img src="/logo.png" className="h-16" alt="Calendar Logo"/>
             <span className="self-center text-2xl font-semibold whitespace-nowrap">
               Calendify

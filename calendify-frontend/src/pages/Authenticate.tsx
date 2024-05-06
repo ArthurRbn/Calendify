@@ -1,14 +1,13 @@
-import React, {useState} from 'react';
-import {useQueryClient} from "react-query";
-import {useNavigate} from "react-router-dom";
-import {myFetch} from "../api/myFetch";
-import {apiUrl} from "../constants";
-import {AuthResponse} from "../types/AuthResponse";
-import {ErrorResponse} from "../types/ErrorResponse";
-import {useSnackbar} from "notistack";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { myFetch } from '../api/myFetch';
+import { apiUrl } from '../constants';
+import { AuthResponse } from '../types/AuthResponse';
+import { ErrorResponse } from '../types/ErrorResponse';
+import { useSnackbar } from 'notistack';
+import { useAuthStatus } from '../hooks/useAuthStatus';
 
 function Authenticate() {
-  const queryClient = useQueryClient();
   const navigate = useNavigate();
   const {enqueueSnackbar} = useSnackbar();
   const [email, setEmail] = useState<string>('');
@@ -16,6 +15,7 @@ function Authenticate() {
   const [confirmPassword, setConfirmPassword] = useState<string>('');
   const [error, setError] = useState<string | undefined>('');
   const [mode, setMode] = useState<'signin' | 'signup'>('signin');
+  const { refetch } = useAuthStatus();
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -45,7 +45,7 @@ function Authenticate() {
     if (response && response.ok) {
       const data = await response.json() as AuthResponse;
       localStorage.setItem('jwt', data.token);
-      await queryClient.invalidateQueries('authStatus');
+      await refetch();
       navigate('/');
     } else {
       console.error(`${mode} error`);
@@ -62,7 +62,7 @@ function Authenticate() {
   return (
     <section className='bg-gray-50'>
       <div className='flex flex-col items-center justify-center mx-auto h-screen'>
-        <a href='#' className='flex items-center mb-6 text-2xl font-semibold'>
+        <a href='/' className='flex items-center mb-6 text-2xl font-semibold'>
           <img
             className='w-8 h-8 mr-2'
             src='/logo.png'

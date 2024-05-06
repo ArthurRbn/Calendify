@@ -1,6 +1,6 @@
-import {useQuery} from 'react-query';
+import { useQuery } from 'react-query';
 import { myFetch } from '../api/myFetch';
-import {apiUrl} from "../constants";
+import { apiUrl } from '../constants';
 
 const checkAuthStatus = async () => {
   const token = localStorage.getItem('jwt');
