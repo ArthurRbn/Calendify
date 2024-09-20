@@ -4,10 +4,6 @@ variable "region" {
   default = "eu-west-3"
 }
 
-variable "s3_name" {
-  type = string
-}
-
 variable "frontend_domain" {
   description = "Domain name for the frontend application"
   type        = string
