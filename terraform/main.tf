@@ -14,7 +14,6 @@ terraform {
 module "common" {
   source = "./common"
   acm_certificate_arn = module.common.acm_certificate_arn
-  region = var.region
 }
 
 module "frontend" {
