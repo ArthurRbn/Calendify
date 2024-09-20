@@ -43,5 +43,5 @@ output "s3_bucket_name" {
 }
 
 output "s3_bucket_website_url" {
-  value = aws_s3_bucket.frontend.website_endpoint
+  value = aws_s3_bucket.frontend.website_domain
 }

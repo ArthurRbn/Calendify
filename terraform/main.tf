@@ -13,10 +13,10 @@ terraform {
 
 module "common" {
   source = "./common"
+  acm_certificate_arn = module.common.acm_certificate_arn
   region = var.region
 }
 
-# Frontend (S3 + CloudFront setup)
 module "frontend" {
   source = "./frontend"
   frontend_domain      = var.frontend_domain
