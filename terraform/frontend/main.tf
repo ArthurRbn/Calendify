@@ -1,9 +1,9 @@
 module "frontend_s3" {
-  source = "../common/s3.tf"
+  source = "../common"
 }
 
 module "frontend_cloudfront" {
-  source           = "../common/cloudfront.fr"
+  source           = "../common"
   s3_bucket_name   = module.frontend_s3.s3_bucket_name
   s3_bucket_website_url = module.frontend_s3.s3_bucket_website_url
   frontend_domain  = var.frontend_domain
