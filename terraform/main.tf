@@ -2,6 +2,15 @@ provider "aws" {
   region = var.region
 }
 
+terraform {
+  backend "s3" {
+    bucket         = "terraform-state-calendify"
+    key            = "calendify/terraform.tfstate"
+    region         = "eu-west-3"
+    dynamodb_table = "terraform-locks-calendify"
+  }
+}
+
 module "common" {
   source = "./common"
   region = var.region
