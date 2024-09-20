@@ -4,7 +4,7 @@ resource "aws_cloudfront_origin_access_identity" "oai" {
 
 resource "aws_cloudfront_distribution" "frontend_distribution" {
   origin {
-    domain_name = aws_s3_bucket.frontend.bucket_regional_domain_name
+    domain_name = "${var.s3_bucket_name}.s3.amazonaws.com"
     origin_id   = "S3-${var.s3_bucket_name}"
 
     s3_origin_config {
@@ -65,6 +65,3 @@ resource "aws_cloudfront_distribution" "frontend_distribution" {
   price_class = "PriceClass_200"
 }
 
-output "cloudfront_url" {
-  value = aws_cloudfront_distribution.frontend_distribution.domain_name
-}

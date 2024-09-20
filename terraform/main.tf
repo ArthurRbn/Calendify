@@ -1,23 +1,17 @@
-provider "aws" {
-  region = var.region
+module "acm" {
+  source         = "./common/modules/acm"
+  frontend_domain = var.frontend_domain
 }
 
-terraform {
-  backend "s3" {
-    bucket         = "terraform-state-calendify"
-    key            = "calendify/terraform.tfstate"
-    region         = "eu-west-3"
-    dynamodb_table = "terraform-locks-calendify"
-  }
+module "s3" {
+  source        = "./common/modules/s3"
+  s3_bucket_name = var.s3_bucket_name
+  cloudfront_oia_arn = module.cloudfront.cloudfront_oia_arn
 }
 
-module "common" {
-  source = "./common"
-  acm_certificate_arn = module.common.acm_certificate_arn
+module "cloudfront" {
+  source              = "./common/modules/cloudfront"
+  s3_bucket_name      = var.s3_bucket_name
+  frontend_domain     = var.frontend_domain
+  acm_certificate_arn = module.acm.acm_certificate_arn
 }
-
-module "frontend" {
-  source = "./frontend"
-  frontend_domain      = var.frontend_domain
-}
-

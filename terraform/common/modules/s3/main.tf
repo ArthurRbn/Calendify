@@ -29,19 +29,11 @@ resource "aws_s3_bucket_policy" "this" {
         Sid       = "AllowCloudFrontAccess"
         Effect    = "Allow"
         Principal = {
-          AWS = aws_cloudfront_origin_access_identity.oai.iam_arn
+          AWS = var.cloudfront_oia_arn
         }
         Action    = "s3:GetObject"
         Resource  = "${aws_s3_bucket.frontend.arn}/**"
       }
     ]
   })
-}
-
-output "s3_bucket_name" {
-  value = aws_s3_bucket.frontend.bucket
-}
-
-output "s3_bucket_website_url" {
-  value = aws_s3_bucket.frontend.website_domain
 }

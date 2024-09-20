@@ -8,3 +8,9 @@ variable "region" {
   type        = string
   default     = "eu-west-3"
 }
+
+variable "s3_bucket_name" {
+    description = "S3 bucket name"
+    type        = string
+    default     = "calendify-frontend-bucket"
+}

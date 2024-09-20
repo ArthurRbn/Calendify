@@ -115,7 +115,7 @@ function Home() {
             <div className="relative bg-white rounded-lg shadow-2xl p-4">
               <div className="flex items-center justify-between pb-2 mb-2 border-b rounded-t">
                 <h2 className="text-xl text-gray-900 font-bold">
-                  {selectedEvent?.title}
+                  {selectedEvent?.title} test
                 </h2>
                 <button
                   type="button"
