@@ -7,10 +7,11 @@ stages:
 #  - deploy_backend
 
 validate_terraform:
-  image: hashicorp/terraform:1.5.6
-  entrypoint:
-    - '/usr/bin/env'
-    - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+  image:
+    name: hashicorp/terraform:1.5.6
+    entrypoint:
+      - '/usr/bin/env'
+      - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
   stage: validate
   script:
     - cd terraform
@@ -18,10 +19,11 @@ validate_terraform:
     - terraform validate
 
 plan_terraform:
-  image: hashicorp/terraform:1.5.6
-  entrypoint:
-    - '/usr/bin/env'
-    - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+  image:
+    name: hashicorp/terraform:1.5.6
+    entrypoint:
+      - '/usr/bin/env'
+      - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
   stage: plan
   script:
     - cd terraform
@@ -29,10 +31,11 @@ plan_terraform:
     - terraform plan
 
 apply_terraform:
-  image: hashicorp/terraform:1.5.6
-  entrypoint:
-    - '/usr/bin/env'
-    - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+  image:
+    name: hashicorp/terraform:1.5.6
+    entrypoint:
+      - '/usr/bin/env'
+      - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
   stage: apply
   script:
     - cd terraform
