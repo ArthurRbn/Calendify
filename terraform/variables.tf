@@ -3,6 +3,11 @@ variable "frontend_domain" {
   default     = "www.calendify.arthurrobine.fr"
 }
 
+variable "frontend_alternative_domain" {
+  description = "Alternative name for the frontend"
+  default     = "calendify.arthurrobine.fr"
+}
+
 variable "region" {
   description = "AWS region"
   type        = string

@@ -1,6 +1,7 @@
 module "acm" {
   source          = "./common/modules/acm"
   frontend_domain = var.frontend_domain
+  frontend_alternative_domain = var.frontend_alternative_domain
 }
 
 module "s3" {
