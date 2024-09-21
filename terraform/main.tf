@@ -65,7 +65,6 @@ module "rds" {
   allocated_storage    = 20
   instance_class       = "db.t3.micro"
   engine_version       = "16.4"
-  parameter_group_name = "default.postgres13"
   private_subnets      = module.vpc.private_subnets
   security_group_ids   = [module.security_group.rds_security_group_id]
 }

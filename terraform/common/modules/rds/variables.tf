@@ -35,12 +35,6 @@ variable "engine_version" {
   default     = "13.4"
 }
 
-variable "parameter_group_name" {
-  description = "The name of the parameter group for the database"
-  type        = string
-  default     = "default.postgres13"
-}
-
 variable "private_subnets" {
   description = "List of private subnets for RDS"
   type        = list(string)
