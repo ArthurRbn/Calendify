@@ -55,8 +55,8 @@ build_frontend:
   only:
     refs:
       - main
-    changes:
-      - calendify-frontend/**
+#    changes:
+#      - calendify-frontend/**
 
 deploy_frontend:
   image: amazon/aws-cli:2.12.0
@@ -70,8 +70,8 @@ deploy_frontend:
   only:
     refs:
       - main
-    changes:
-      - calendify-frontend/**
+#    changes:
+#      - calendify-frontend/**
 
 #deploy_backend:
 #  image: docker:latest
