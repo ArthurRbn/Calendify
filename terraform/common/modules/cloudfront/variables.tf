@@ -20,3 +20,8 @@ variable "acm_certificate_arn" {
 variable "region" {
   default = ""
 }
+
+variable "alb_dns_name" {
+  description = "The DNS name of the ALB"
+  type        = string
+}

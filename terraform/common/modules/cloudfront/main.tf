@@ -17,6 +17,18 @@ resource "aws_cloudfront_distribution" "frontend_distribution" {
     }
   }
 
+  origin {
+    domain_name = var.alb_dns_name
+    origin_id   = "ALB-origin"
+
+    custom_origin_config {
+      http_port              = 80
+      https_port             = 443
+      origin_protocol_policy = "https-only"
+      origin_ssl_protocols   = ["TLSv1.2_2021"]
+    }
+  }
+
   enabled = true
   default_root_object = "index.html"
 
@@ -32,13 +44,35 @@ resource "aws_cloudfront_distribution" "frontend_distribution" {
       query_string = true
 
       cookies {
-        forward = "all"
+        forward = "none"
       }
     }
 
-    min_ttl                = 0
-    default_ttl            = 0
-    max_ttl                = 0
+    min_ttl     = 0
+    default_ttl = 3600
+    max_ttl     = 86400
+  }
+
+  ordered_cache_behavior {
+    path_pattern           = "/api/*"
+    target_origin_id       = "ALB-origin"
+    viewer_protocol_policy = "redirect-to-https"
+    allowed_methods        = ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+    cached_methods         = ["GET", "HEAD"]
+
+    forwarded_values {
+      query_string = true
+
+      cookies {
+        forward = "all"
+      }
+
+      headers = ["Authorization", "Content-Type"]
+    }
+
+    min_ttl     = 0
+    default_ttl = 0
+    max_ttl     = 0
   }
 
   custom_error_response {
