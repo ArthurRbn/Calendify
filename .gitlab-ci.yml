@@ -59,14 +59,18 @@ build_frontend:
 #      - calendify-frontend/**
 
 deploy_frontend:
-  image: amazon/aws-cli:2.12.0
+  image: python:3.9-alpine
   stage: deploy_frontend
   environment:
     name: production
   dependencies:
     - build_frontend
+  before_script:
+    - apk add --no-cache python3 py3-pip
+    - pip install awscli
   script:
-    - aws s3 sync calendify-frontend/build/ s3://$S3_NAME --delete
+    - aws s3api list-buckets
+    - aws s3 sync calendify-frontend/build/ s3://$S3_NAME --delete --region $REGION
   only:
     refs:
       - main
