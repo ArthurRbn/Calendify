@@ -57,7 +57,7 @@ resource "aws_cloudfront_distribution" "frontend_distribution" {
     path_pattern           = "/api/*"
     target_origin_id       = "ALB-origin"
     viewer_protocol_policy = "redirect-to-https"
-    allowed_methods        = ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+    allowed_methods        = ["HEAD", "GET", "OPTIONS", "POST", "PUT", "DELETE", "PATCH"]
     cached_methods         = ["GET", "HEAD"]
 
     forwarded_values {

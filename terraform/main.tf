@@ -37,14 +37,14 @@ module "alb" {
   healthy_threshold       = 2
   unhealthy_threshold     = 2
   listener_port           = 80
-  acm_certificate_arn     = module.acm.acm_certificate_arn
+  acm_certificate_arn     = module.acm.acm_certificate_arn_eu_west_3
 }
 
 module "cloudfront" {
   source              = "./common/modules/cloudfront"
   s3_bucket_name      = var.s3_bucket_name
   frontend_domain     = var.frontend_domain
-  acm_certificate_arn = module.acm.acm_certificate_arn
+  acm_certificate_arn = module.acm.acm_certificate_arn_us_east_1
   region              = var.region
   frontend_alternative_domain = var.frontend_alternative_domain
   alb_dns_name = module.alb.alb_dns_name
