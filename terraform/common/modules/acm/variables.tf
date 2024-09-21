@@ -5,5 +5,5 @@ variable "frontend_domain" {
 
 variable "frontend_alternative_domain" {
   description = "Alternative name for the frontend"
-  default     = "calendify.arthurrobine.fr"
+  type        = string
 }

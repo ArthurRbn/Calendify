@@ -16,4 +16,5 @@ module "cloudfront" {
   frontend_domain     = var.frontend_domain
   acm_certificate_arn = module.acm.acm_certificate_arn
   region              = var.region
+  frontend_alternative_domain = var.frontend_alternative_domain
 }

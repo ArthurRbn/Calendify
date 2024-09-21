@@ -20,7 +20,7 @@ resource "aws_cloudfront_distribution" "frontend_distribution" {
   enabled = true
   default_root_object = "index.html"
 
-  aliases = [var.frontend_domain]
+  aliases = [var.frontend_domain, var.frontend_alternative_domain]
 
   default_cache_behavior {
     target_origin_id = local.s3_origin_id

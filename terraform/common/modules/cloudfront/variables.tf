@@ -3,6 +3,11 @@ variable "frontend_domain" {
   type        = string
 }
 
+variable "frontend_alternative_domain" {
+  description = "Alternative name for the frontend"
+  type        = string
+}
+
 variable "s3_bucket_name" {
   description = "S3 bucket name"
   type        = string
