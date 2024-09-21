@@ -20,6 +20,23 @@ variable "s3_bucket_name" {
     default     = "calendify-frontend-bucket"
 }
 
+variable "db_name" {
+  description = "The name of the database"
+  type        = string
+}
+
+variable "db_username" {
+  description = "The database username"
+  type        = string
+}
+
+variable "db_password" {
+  description = "The database password"
+  type        = string
+  sensitive   = true
+}
+
+
 /*variable "vpc_id" {
   description = "VPC ID where the ALB should be deployed"
   type        = string

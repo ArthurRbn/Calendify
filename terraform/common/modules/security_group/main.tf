@@ -1,24 +1,14 @@
-resource "aws_security_group" "this" {
+resource "aws_security_group" "ecs" {
   vpc_id = var.vpc_id
 
   ingress {
-    description = "Allow HTTP traffic"
-    from_port   = 80
-    to_port     = 80
+    from_port   = 4200
+    to_port     = 4200
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    description = "Allow HTTPS traffic"
-    from_port   = 443
-    to_port     = 443
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    security_groups = [module.alb.alb_security_group_id]
   }
 
   egress {
-    description = "Allow all outbound traffic"
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
@@ -26,6 +16,36 @@ resource "aws_security_group" "this" {
   }
 
   tags = {
-    Name = var.name
+    Name = "${var.name}-ecs-sg"
   }
+}
+
+resource "aws_security_group" "rds" {
+  vpc_id = var.vpc_id
+
+  ingress {
+    from_port   = 5432
+    to_port     = 5432
+    protocol    = "tcp"
+    security_groups = [aws_security_group.ecs.id]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "${var.name}-rds-sg"
+  }
+}
+
+output "ecs_security_group_id" {
+  value = aws_security_group.ecs.id
+}
+
+output "rds_security_group_id" {
+  value = aws_security_group.rds.id
 }
