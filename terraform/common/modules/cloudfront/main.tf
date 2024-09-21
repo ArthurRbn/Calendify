@@ -1,3 +1,8 @@
+locals {
+  s3_origin_id   = "${var.s3_bucket_name}-origin"
+  s3_domain_name = "${var.s3_bucket_name}.s3-website-${var.region}.amazonaws.com"
+}
+
 resource "aws_cloudfront_origin_access_identity" "oai" {
   comment = "OAI for S3"
 }
@@ -5,25 +10,23 @@ resource "aws_cloudfront_origin_access_identity" "oai" {
 resource "aws_cloudfront_distribution" "frontend_distribution" {
   origin {
     domain_name = "${var.s3_bucket_name}.s3.amazonaws.com"
-    origin_id   = "S3-${var.s3_bucket_name}"
+    origin_id   = local.s3_origin_id
 
     s3_origin_config {
       origin_access_identity = aws_cloudfront_origin_access_identity.oai.cloudfront_access_identity_path
     }
   }
 
-  enabled             = true
-  is_ipv6_enabled     = true
+  enabled = true
   default_root_object = "index.html"
 
   aliases = [var.frontend_domain]
 
   default_cache_behavior {
-    target_origin_id = "S3-${var.s3_bucket_name}"
+    target_origin_id = local.s3_origin_id
     viewer_protocol_policy = "redirect-to-https"
     allowed_methods        = ["GET", "HEAD"]
     cached_methods         = ["GET", "HEAD"]
-    compress               = true
 
     forwarded_values {
       query_string = true

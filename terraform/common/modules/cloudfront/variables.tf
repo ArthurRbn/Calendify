@@ -11,3 +11,7 @@ variable "s3_bucket_name" {
 variable "acm_certificate_arn" {
   default = ""
 }
+
+variable "region" {
+  default = ""
+}
