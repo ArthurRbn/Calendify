@@ -24,7 +24,6 @@ module "alb" {
   name                    = "calendify-backend-alb"
   vpc_id                  = module.vpc.vpc_id
   subnets                 = module.vpc.public_subnets
-  security_groups         = [module.security_group.security_group_id]
   target_group_port       = 4200
   health_check_path       = "/health"
   health_check_interval   = 30
@@ -49,6 +48,7 @@ module "security_group" {
   source = "./common/modules/security_group"
   name   = "calendify-security-groups"
   vpc_id = module.vpc.vpc_id
+  alb_security_group_id = module.alb.alb_security_group_id
 }
 
 module "iam" {

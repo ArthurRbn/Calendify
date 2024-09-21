@@ -5,7 +5,7 @@ resource "aws_security_group" "ecs" {
     from_port   = 4200
     to_port     = 4200
     protocol    = "tcp"
-    security_groups = [module.alb.alb_security_group_id]
+    security_groups = [var.alb_security_group_id]
   }
 
   egress {
@@ -42,10 +42,3 @@ resource "aws_security_group" "rds" {
   }
 }
 
-output "ecs_security_group_id" {
-  value = aws_security_group.ecs.id
-}
-
-output "rds_security_group_id" {
-  value = aws_security_group.rds.id
-}

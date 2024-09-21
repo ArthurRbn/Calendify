@@ -7,3 +7,8 @@ variable "name" {
   description = "Name of the security group"
   type        = string
 }
+
+variable "alb_security_group_id" {
+  description = "The security group ID for the ALB"
+  type        = string
+}

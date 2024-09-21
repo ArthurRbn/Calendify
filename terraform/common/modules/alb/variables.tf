@@ -13,11 +13,6 @@ variable "subnets" {
   type        = list(string)
 }
 
-variable "security_groups" {
-  description = "Security groups to attach to the ALB"
-  type        = list(string)
-}
-
 variable "enable_deletion_protection" {
   description = "Enable deletion protection for the ALB"
   type        = bool
