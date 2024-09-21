@@ -7,3 +7,10 @@ resource "aws_acm_certificate" "this" {
     Name = "SSL certificate for ${var.frontend_domain}"
   }
 }
+
+data "aws_acm_certificate" "this" {
+  domain   = var.frontend_domain
+  statuses = ["ISSUED"]
+  most_recent = true
+  provider = aws.us_east_1
+}
