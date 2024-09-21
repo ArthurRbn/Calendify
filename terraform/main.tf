@@ -15,7 +15,7 @@ module "vpc" {
   name   = "calendify-vpc"
   vpc_cidr = "10.0.0.0/16"
   public_subnet_cidrs = ["10.0.1.0/24", "10.0.2.0/24"]
-  availability_zones  = ["euw3-az1", "euw3-az2", "euw3-az3"]
+  availability_zones  = ["eu-west-3a", "eu-west-3b", "eu-west-3c"]
 }
 
 module "security_group" {
