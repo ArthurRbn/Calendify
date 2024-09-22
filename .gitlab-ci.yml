@@ -55,8 +55,8 @@ build_frontend:
   only:
     refs:
       - main
-#    changes:
-#      - calendify-frontend/**
+    changes:
+      - calendify-frontend/**
 
 deploy_frontend:
   image: python:3.9-alpine
@@ -74,8 +74,8 @@ deploy_frontend:
   only:
     refs:
       - main
-#    changes:
-#      - calendify-frontend/**
+    changes:
+      - calendify-frontend/**
 
 deploy_backend:
   image: docker:latest
@@ -101,8 +101,10 @@ deploy_backend:
     - aws ecs update-service --cluster calendify-backend-cluster --service calendify-backend-service --force-new-deployment --region $REGION
 
   only:
-    changes:
-      - calendify-backend/**
+    refs:
+      - main
+#    changes:
+#      - calendify-backend/**
 
 #deploy_backend:
 #  image: docker:latest
