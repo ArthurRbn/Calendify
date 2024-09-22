@@ -40,3 +40,13 @@ variable "ecr_url" {
   description = "URL to the ecr repository"
   type        = string
 }
+
+variable "server_port" {
+  description = "Server port to listen on"
+  type        = string
+}
+
+variable "secret_key" {
+  description = "Secret key for the backend"
+  type        = string
+}

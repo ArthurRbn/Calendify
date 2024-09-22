@@ -41,6 +41,14 @@ resource "aws_ecs_task_definition" "this" {
         {
           name  = "DB_PASSWORD"
           value = var.db_password
+        },
+        {
+          name  = "SERVER_PORT"
+          value = var.server_port
+        },
+        {
+          name  = "SECRET_KEY"
+          value = var.secret_key
         }
       ]
     }

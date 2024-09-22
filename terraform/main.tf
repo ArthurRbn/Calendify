@@ -80,6 +80,8 @@ module "ecs" {
   db_name               = var.db_name
   db_username           = var.db_username
   db_password           = var.db_password
+  server_port = var.server_port
+  secret_key            = var.secret_key
   private_subnets       = module.vpc.private_subnets
   security_groups       = [module.security_group.ecs_security_group_id]
   target_group_arn      = module.alb.target_group_arn
