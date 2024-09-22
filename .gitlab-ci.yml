@@ -134,7 +134,7 @@ deploy_backend:
     - docker push $ECR_URL:latest
 
     # Update the ECS Service
-    - aws ecs update-service --cluster calendify-backend-cluster --service calendify-backend-service --force-new-deployment --region $AWS_REGION
+    - aws ecs update-service --cluster calendify-backend-cluster --service calendify-backend-service --force-new-deployment --region $REGION
   only:
     refs:
       - main
