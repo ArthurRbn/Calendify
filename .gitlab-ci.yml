@@ -77,6 +77,33 @@ deploy_frontend:
 #    changes:
 #      - calendify-frontend/**
 
+deploy_backend:
+  image: docker:latest
+  stage: deploy_backend
+  services:
+    - docker:dind
+  variables:
+    DOCKER_DRIVER: overlay2
+  script:
+    - echo "Logging into AWS ECR..."
+    - aws ecr get-login-password --region $REGION | docker login --username AWS --password-stdin $ECR_URL
+
+    - echo "Building Docker image..."
+    - docker build -t $ECR_URL:latest ./calendify-backend
+
+    - echo "Tagging image..."
+    - docker tag $ECR_URL:latest $ECR_URL:latest
+
+    - echo "Pushing Docker image to AWS ECR..."
+    - docker push $ECR_URL:latest
+
+    - echo "Updating ECS Service..."
+    - aws ecs update-service --cluster calendify-backend-cluster --service calendify-backend-service --force-new-deployment --region $REGION
+
+  only:
+    changes:
+      - calendify-backend/**
+
 #deploy_backend:
 #  image: docker:latest
 #  stage: deploy_backend
