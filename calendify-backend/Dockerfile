@@ -19,7 +19,7 @@ RUN npm run build
 # Expose the port the app runs on
 EXPOSE 4200
 
-RUN apt-get update && apt-get install -y dnsutils netcat
+RUN apt-get update && apt-get install -y dnsutils netcat-openbsd
 
 # Command to run the application
 #CMD ["npm", "start"]
