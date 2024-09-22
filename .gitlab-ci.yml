@@ -129,10 +129,8 @@ deploy_backend:
     - echo "Building Docker image..."
     - docker build -t $ECR_URL/calendify-backend:latest ./calendify-backend
 
-    # Tag the image
-    - docker tag calendify-backend:latest $ECR_URL/calendify-backend:latest
-
     # Push the Docker image to ECR
+    - echo "Pushing Docker image to AWS ECR..."
     - docker push $ECR_URL/calendify-backend:latest
 
     # Update the ECS Service
