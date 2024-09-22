@@ -17,9 +17,6 @@ validate_terraform:
     - cd terraform
     - terraform init
     - terraform validate
-  only:
-    changes:
-      - calendify-frontend/**
 
 plan_terraform:
   image:
@@ -32,9 +29,6 @@ plan_terraform:
     - cd terraform
     - terraform init
     - terraform plan
-  only:
-    changes:
-      - calendify-frontend/**
 
 apply_terraform:
   image:
@@ -47,9 +41,6 @@ apply_terraform:
     - cd terraform
     - terraform init
     - terraform apply -auto-approve
-  only:
-    changes:
-      - calendify-frontend/**
 
 build_frontend:
   image: node:21.7.0
@@ -85,33 +76,6 @@ deploy_frontend:
       - main
     changes:
       - calendify-frontend/**
-
-#deploy_backend:
-#  image: docker:latest
-#  stage: deploy_backend
-#  services:
-#    - docker:dind
-#  variables:
-#    DOCKER_DRIVER: overlay2
-#  script:
-#    - echo "Logging into AWS ECR..."
-#    - aws ecr get-login-password --region $REGION | docker login --username AWS --password-stdin $ECR_URL
-#
-#    - echo "Building Docker image..."
-#    - docker build -t $ECR_URL:latest ./calendify-backend
-#
-#    - echo "Tagging image..."
-#    - docker tag $ECR_URL:latest $ECR_URL:latest
-#
-#    - echo "Pushing Docker image to AWS ECR..."
-#    - docker push $ECR_URL:latest
-#
-#    - echo "Updating ECS Service..."
-#    - aws ecs update-service --cluster calendify-backend-cluster --service calendify-backend-service --force-new-deployment --region $REGION
-#
-#  only:
-#    refs:
-#      - main
 
 deploy_backend:
   image: docker:latest
