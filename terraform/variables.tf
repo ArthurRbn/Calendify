@@ -36,18 +36,7 @@ variable "db_password" {
   sensitive   = true
 }
 
-
-/*variable "vpc_id" {
-  description = "VPC ID where the ALB should be deployed"
+variable "ecr_url" {
+  description = "URL to the ecr repository"
   type        = string
-}*/
-
-/*variable "public_subnets" {
-  description = "List of public subnets for the ALB"
-  type        = list(string)
 }
-
-variable "security_groups" {
-  description = "List of security groups to associate with the ALB"
-  type        = list(string)
-}*/

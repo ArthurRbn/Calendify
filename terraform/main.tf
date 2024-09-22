@@ -74,7 +74,7 @@ module "ecs" {
   cluster_name          = "calendify-backend-cluster"
   service_name          = "calendify-backend-service"
   task_family           = "calendify-backend"
-  container_image       = "calendify-backend:latest"
+  container_image       = "${var.ecr_url}:latest"
   container_port        = 4200
   db_host               = module.rds.rds_endpoint
   db_name               = var.db_name
