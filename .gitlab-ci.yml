@@ -127,11 +127,11 @@ deploy_backend:
   script:
     # Build the Docker image
     - echo "Building Docker image..."
-    - docker build -t $ECR_URL/calendify-backend:latest ./calendify-backend
+    - docker build -t $ECR_URL:latest ./calendify-backend
 
     # Push the Docker image to ECR
     - echo "Pushing Docker image to AWS ECR..."
-    - docker push $ECR_URL/calendify-backend:latest
+    - docker push $ECR_URL:latest
 
     # Update the ECS Service
     - aws ecs update-service --cluster calendify-backend-cluster --service calendify-backend-service --force-new-deployment --region $AWS_REGION
