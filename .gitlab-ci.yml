@@ -4,7 +4,7 @@ stages:
   - apply
   - build_frontend
   - deploy_frontend
-#  - deploy_backend
+  - deploy_backend
 
 validate_terraform:
   image:
