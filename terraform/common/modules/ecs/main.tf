@@ -21,6 +21,14 @@ resource "aws_ecs_task_definition" "this" {
           protocol      = "tcp"
         }
       ]
+      logConfiguration = {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "ecs-calendify-backend",
+          "awslogs-region": "eu-west-3",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
       environment = [
         {
           name  = "DB_HOST"

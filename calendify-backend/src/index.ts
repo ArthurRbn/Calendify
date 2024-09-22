@@ -21,6 +21,10 @@ app.get('/api', (req, res) => {
   res.send('Calendify API is up !');
 });
 
+app.get('/health', (req, res) => {
+  res.status(200).send('OK');
+});
+
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
