@@ -19,5 +19,18 @@ RUN npm run build
 # Expose the port the app runs on
 EXPOSE 4200
 
+RUN apt-get update && apt-get install -y dnsutils netcat
+
 # Command to run the application
-CMD ["npm", "start"]
+#CMD ["npm", "start"]
+
+CMD /bin/sh -c "\
+  echo 'Checking DNS resolution for DB_HOST: ${DB_HOST}...'; \
+  nslookup ${DB_HOST}; \
+  echo 'Checking connectivity to RDS on ${DB_HOST}:${DB_PORT}...'; \
+  nc -zv ${DB_HOST} ${DB_PORT}; \
+  echo 'Environment Variables:'; \
+  env | grep DB_; \
+  echo 'Starting the application...'; \
+  npm start"
+
