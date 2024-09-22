@@ -112,7 +112,7 @@ deploy_backend:
   variables:
     DOCKER_DRIVER: overlay2
   before_script:
-    - apk add --no-cache python3 py3-pip
+    - apk add --no-cache python3 py3-pip py3-docker
     - pip install awscli
     - aws --version
     - aws ecr get-login-password --region $REGION | docker login --username AWS --password-stdin $ECR_URL
