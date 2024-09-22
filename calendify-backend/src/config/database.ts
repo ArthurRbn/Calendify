@@ -13,9 +13,7 @@ const sequelize = new Sequelize(
         port: parseInt(process.env.DB_PORT),
         dialect: 'postgres',
         dialectOptions: {
-            ssl: {
-                require: false,
-            }
+            ssl: false
         }
     }
 );
