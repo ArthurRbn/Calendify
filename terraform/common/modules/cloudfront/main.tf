@@ -3,6 +3,14 @@ locals {
   s3_domain_name = "${var.s3_bucket_name}.s3-website-${var.region}.amazonaws.com"
 }
 
+data "aws_cloudfront_cache_policy" "caching_disabled" {
+  name = "CachingDisabled"
+}
+
+data "aws_cloudfront_origin_request_policy" "all_viewer" {
+  name = "AllViewer"
+}
+
 resource "aws_cloudfront_origin_access_identity" "oai" {
   comment = "OAI for S3"
 }
@@ -54,11 +62,13 @@ resource "aws_cloudfront_distribution" "frontend_distribution" {
   }
 
   ordered_cache_behavior {
-    path_pattern           = "/api/*"
-    target_origin_id       = "ALB-origin"
-    viewer_protocol_policy = "redirect-to-https"
-    allowed_methods        = ["HEAD", "GET", "OPTIONS", "POST", "PUT", "DELETE", "PATCH"]
-    cached_methods         = ["GET", "HEAD"]
+    path_pattern             = "/api/*"
+    target_origin_id         = "ALB-origin"
+    viewer_protocol_policy   = "redirect-to-https"
+    allowed_methods          = ["HEAD", "GET", "OPTIONS", "POST", "PUT", "DELETE", "PATCH"]
+    cached_methods           = ["GET", "HEAD"]
+    cache_policy_id          = data.aws_cloudfront_cache_policy.caching_disabled.id
+    origin_request_policy_id = data.aws_cloudfront_origin_request_policy.all_viewer.id
 
     forwarded_values {
       query_string = true
