@@ -70,16 +70,6 @@ resource "aws_cloudfront_distribution" "frontend_distribution" {
     cache_policy_id          = data.aws_cloudfront_cache_policy.caching_disabled.id
     origin_request_policy_id = data.aws_cloudfront_origin_request_policy.all_viewer.id
 
-    forwarded_values {
-      query_string = true
-
-      cookies {
-        forward = "all"
-      }
-
-      headers = ["Authorization", "Content-Type"]
-    }
-
     min_ttl     = 0
     default_ttl = 0
     max_ttl     = 0
