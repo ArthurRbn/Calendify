@@ -4,11 +4,11 @@ locals {
 }
 
 data "aws_cloudfront_cache_policy" "caching_disabled" {
-  name = "CachingDisabled"
+  name = "Managed-CachingDisabled"
 }
 
 data "aws_cloudfront_origin_request_policy" "all_viewer" {
-  name = "AllViewer"
+  name = "Managed-AllViewer"
 }
 
 resource "aws_cloudfront_origin_access_identity" "oai" {
