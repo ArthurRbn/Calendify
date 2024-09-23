@@ -21,9 +21,7 @@ EXPOSE 4200
 
 RUN apt-get update && apt-get install -y dnsutils netcat-openbsd
 
-# Command to run the application
-#CMD ["npm", "start"]
-
+# Command to check the RDS DNS resolution and run the application
 CMD /bin/sh -c "\
   echo 'Checking DNS resolution for DB_HOST: ${DB_HOST}...'; \
   nslookup ${DB_HOST}; \
@@ -33,4 +31,3 @@ CMD /bin/sh -c "\
   env | grep DB_; \
   echo 'Starting the application...'; \
   npm start"
-

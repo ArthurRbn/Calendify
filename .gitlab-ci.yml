@@ -55,8 +55,6 @@ build_frontend:
   only:
     refs:
       - main
-    changes:
-      - calendify-frontend/**
 
 deploy_frontend:
   image: python:3.9-alpine
@@ -74,8 +72,6 @@ deploy_frontend:
   only:
     refs:
       - main
-    changes:
-      - calendify-frontend/**
 
 deploy_backend:
   image: docker:latest
@@ -89,23 +85,13 @@ deploy_backend:
     - aws --version
     - aws ecr get-login-password --region $REGION | docker login --username AWS --password-stdin $ECR_URL
   script:
-    # Build the Docker image
     - echo "Building Docker image..."
     - docker build -t $ECR_URL:latest ./calendify-backend
 
-    # Push the Docker image to ECR
     - echo "Pushing Docker image to AWS ECR..."
     - docker push $ECR_URL:latest
 
-    # Update the ECS Service
     - aws ecs update-service --cluster calendify-backend-cluster --service calendify-backend-service --force-new-deployment --region $REGION
   only:
     refs:
       - main
-
-
-#    changes:
-#      - calendify-backend/**
-
-#    changes:
-#      - calendify-backend/**
