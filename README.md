@@ -2,6 +2,10 @@
 
 **Calendify** is a modern calendar application designed to help appointment scheduling. This project was developed as part of a technical challenge to demonstrate capabilities in creating full-stack applications with an emphasis on clean, functional UI and efficient backend services.
 
+## Demo
+
+Check out the live demo here: [calendify.arthurrobine.fr](https://calendify.arthurrobine.fr)
+
 ## Features
 
 - **View Appointments**: See all scheduled appointments in a weekly or monthly calendar view.
