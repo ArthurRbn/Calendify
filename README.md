@@ -17,6 +17,7 @@
 - **Database**: PostgreSQL
 - **Authentication**: JWT for secure token-based authentication
 - **Styling**: Tailwind CSS for a responsive and modern UI
+- **Deployment**: Terraform + AWS
 
 ## Installation
 
@@ -41,8 +42,8 @@
    SERVER_PORT=4200
    SECRET_KEY=your_secret_key
    ```
-   
-4. Create a `.env` file in the `calendify-backend` directory and update it with your database and application settings:
+
+4. Create a `.env` file in the `calendify-frontend` directory and update it with your database and application settings:
    ```
    REACT_APP_API_BASE_URL=http://localhost:4200/api
    ```
@@ -62,6 +63,44 @@
 
 6. **Access the application**:
    Open a web browser and navigate to [http://localhost:3000](http://localhost:3000) to start using Calendify.
+
+## CI/CD Pipeline
+
+The project is integrated with a CI/CD pipeline using GitLab CI to automate deployment:
+
+- Continuous Deployment (CD): The project is deployed automatically to AWS using ECS for the backend and S3 + CloudFront for the frontend.
+
+To configure this:
+1. Define the CI pipeline in a `.gitlab-ci.yml` file. This will include stages for building Docker images and deploying them to AWS.
+2. The frontend is deployed to an S3 bucket, and CloudFront is configured to serve the static assets.
+3. The backend is containerized and deployed to an ECS cluster using Fargate.
+4. PostgreSQL is hosted on AWS RDS, and the database credentials are securely stored in AWS Secrets Manager.
+
+## Terraform Deployment
+
+This project uses Terraform to manage the infrastructure:
+
+### VPC and Networking:
+- A VPC is created with public and private subnets, an internet gateway, and NAT gateway.
+- Public subnets host the Application Load Balancer (ALB) for routing traffic to ECS.
+- Private subnets are used for the ECS tasks and RDS PostgreSQL instance.
+
+### ECS (Elastic Container Service):
+- The backend is deployed to ECS with Fargate launch type.
+- A load balancer is used to route traffic from CloudFront to the ECS tasks.
+
+### S3 and CloudFront:
+- The frontend is hosted in an S3 bucket, and CloudFront is used for global distribution.
+
+### RDS (Relational Database Service):
+- PostgreSQL is deployed in private subnets with security groups ensuring only the backend can access it.
+
+### Terraform Commands:
+```bash
+terraform init
+terraform plan
+terraform apply
+```
 
 ## License
 
