@@ -106,6 +106,8 @@ terraform plan
 terraform apply
 ```
 
+![Infrastructure](./infra-calendify.png)
+
 ## License
 
 Distributed under the GPL-3.0 License. See `LICENSE` for more information.
